@@ -794,16 +794,6 @@ xloadcolor(int i, const char *name, Color *ncolor)
 }
 
 void
-xloadalpha(void)
-{
-	float const usedAlpha = focused ? alpha : alphaUnfocus;
-	if (opt_alpha) alpha = strtof(opt_alpha, NULL);
-	dc.col[defaultbg].color.alpha = (unsigned short)(0xffff * usedAlpha);
-	dc.col[defaultbg].pixel &= 0x00FFFFFF;
-	dc.col[defaultbg].pixel |= (unsigned char)(0xff * usedAlpha) << 24;
-}
-
-void
 xloadcols(void)
 {
 	int i;
@@ -826,7 +816,6 @@ xloadcols(void)
 	if (dc.collen) // cannot die, as the color is already loaded.
 		xloadcolor(background, NULL, &dc.col[defaultbg]);
 
-	xloadalpha();
 	loaded = 1;
 }
 
